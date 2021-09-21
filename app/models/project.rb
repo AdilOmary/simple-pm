@@ -14,7 +14,8 @@ class Project < ApplicationRecord
   end
 
   def status
-    return 'not-started' if tasks.none
+    return 'not-started' if tasks.none?
+
     if tasks.all? {|task| task.complete? }
       'complete'
     elsif tasks.any? {|task| task.in_progress?}
@@ -22,5 +23,12 @@ class Project < ApplicationRecord
     else
       'not-started'
     end
+  end
+
+  def percent_complete
+    return 0 if tasks.none?
+
+    complete tasks = tasks.select { |task| task.complete? }.count
+    ((complete_tasks.to_f / tasks.count) * 100.round)
   end
 end
