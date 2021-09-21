@@ -18,7 +18,7 @@ class Project < ApplicationRecord
 
     if tasks.all? {|task| task.complete? }
       'complete'
-    elsif tasks.any? {|task| task.in_progress?}
+    elsif tasks.any? {|task| task.in_progress? || task.complete?}
       'in-progress'
     else
       'not-started'
