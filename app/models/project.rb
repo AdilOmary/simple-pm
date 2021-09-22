@@ -16,9 +16,9 @@ class Project < ApplicationRecord
   def status
     return 'not-started' if tasks.none?
 
-    if tasks.all? {|task| task.complete? }
+    if tasks.all? { |task| task.complete? }
       'complete'
-    elsif tasks.any? {|task| task.in_progress? || task.complete?}
+    elsif tasks.any? { |task| task.in_progress? || task.complete? }
       'in-progress'
     else
       'not-started'
@@ -32,7 +32,7 @@ class Project < ApplicationRecord
   end
 
   def total_complete
-    tasks.select {|task| task.complete? }.count
+    tasks.select { |task| task.complete? }.count
   end
 
   def total_tasks
